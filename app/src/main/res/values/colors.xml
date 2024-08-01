@@ -3,4 +3,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primario">#2B2342</color>
+    <color name="radioButtomFalse">#7B44C1</color>
+    <color name="bckbtntop">#E800ED</color>
+    <color name="linear">#8927D7</color>
+    <color name="background_color">#2E2750</color>
+    <color name="button_color">#FF00FF</color>
+    <color name="register_text_color">#00FFFF</color>
+
 </resources>

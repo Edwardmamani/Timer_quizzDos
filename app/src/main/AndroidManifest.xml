@@ -6,12 +6,18 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_timerquizz"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo_timerquizz"
         android:supportsRtl="true"
         android:theme="@style/Theme.Timer_quizzDos"
         tools:targetApi="31">
+        <activity
+            android:name=".Auth.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Auth.LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".AddTemaActivity"
             android:exported="false" />

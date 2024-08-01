@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="PaddingActivity">
+        <item name="android:padding">20dp</item>
+    </style>
+
+    <style name="Theme.App.White" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Colores personalizados -->
+        <item name="android:background">@color/primario</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+</resources>
