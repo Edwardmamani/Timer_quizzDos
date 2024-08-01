@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp">
+    android:background="@drawable/bottom_border"
+    android:layout_marginTop="20sp"
+    android:paddingBottom="5dp"
+    android:theme="@style/Theme.App.White">
 
     <TextView
         android:id="@+id/dataEstadisticaKey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:text="[Data Estadistica] key"
-        android:textSize="25sp"
+        android:text="@string/premedio"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,11 +23,9 @@
         android:id="@+id/dataEstadisticaValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="[Data Estadistica] value"
-        android:textSize="25sp"
+        android:text="@string/tiempo"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.548"
-        app:layout_constraintStart_toEndOf="@+id/dataEstadisticaKey"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

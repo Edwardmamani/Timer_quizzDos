@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
 import android.view.View
+import android.widget.Chronometer
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -46,6 +47,14 @@ class SecondActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        binding.chronometer2.onChronometerTickListener = Chronometer.OnChronometerTickListener {
+            val elapsedMillis = SystemClock.elapsedRealtime() - binding.chronometer2.base
+            val hours = (elapsedMillis / 3600000).toInt()
+            val minutes = ((elapsedMillis - hours * 3600000) / 60000).toInt()
+            val seconds = ((elapsedMillis - hours * 3600000 - minutes * 60000) / 1000).toInt()
+            val time = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+            binding.chronometer2.text = time
         }
         initData()
         initView()

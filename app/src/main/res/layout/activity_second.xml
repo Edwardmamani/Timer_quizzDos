@@ -5,25 +5,30 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primario"
     tools:context=".SecondActivity">
+
     <TextView
         android:id="@+id/idTema"
         android:layout_width="30dp"
         android:layout_height="32dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="16dp"
-        android:text="13"
+        android:text="@string/trece"
+        android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tema"
-        android:layout_width="260dp"
-        android:layout_height="38dp"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
-        android:textSize="25sp"
+        android:text="@string/tema"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintStart_toEndOf="@+id/idTema"
@@ -31,57 +36,36 @@
 
 
     <Chronometer
-        android:id="@+id/chronometer2"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="68dp"
-
-        android:textSize="50sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.23"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/nextPregunta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="20dp"
-        android:text="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start" />
-
-
-    <ImageView
-        android:id="@+id/start"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chronometer2"
-        app:srcCompat="@drawable/boton_de_play" />
-
-
-
-    <Chronometer
         android:id="@+id/chronometerPregunta"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_width="124dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="16dp"
+        android:textAlignment="textEnd"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.774"
+        app:layout_constraintHorizontal_bias="0.867"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chronometer2" />
 
+    <Chronometer
+        android:id="@+id/chronometer2"
+        android:layout_width="251dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="48dp"
+        android:textAlignment="textEnd"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.728"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="301dp"
-        android:layout_height="51dp"
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,43 +75,71 @@
 
         <RadioButton
             android:id="@+id/radioButton1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bg_radio_button"
+            android:button="@null"
+            android:gravity="center"
             android:onClick="onRadioButtonClicked"
-            android:text="A" />
+            android:padding="0dp"
+            android:text="@string/A"
+            android:textColor="@color/white"
+            android:textSize="36sp" />
 
         <RadioButton
             android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bg_radio_button"
+            android:button="@null"
+            android:gravity="center"
             android:onClick="onRadioButtonClicked"
-            android:text="B" />
+            android:padding="0dp"
+            android:text="@string/B"
+            android:textColor="@color/white"
+            android:textSize="36sp" />
 
         <RadioButton
             android:id="@+id/radioButton3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bg_radio_button"
+            android:button="@null"
+            android:gravity="center"
             android:onClick="onRadioButtonClicked"
-            android:text="C" />
+            android:padding="0dp"
+            android:text="@string/C"
+            android:textColor="@color/white"
+            android:textSize="36sp" />
 
         <RadioButton
             android:id="@+id/radioButton4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bg_radio_button"
+            android:button="@null"
+            android:gravity="center"
             android:onClick="onRadioButtonClicked"
-            android:text="D" />
+            android:text="@string/D"
+            android:textColor="@color/white"
+            android:textSize="36sp" />
 
         <RadioButton
             android:id="@+id/radioButton5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bg_radio_button"
+            android:button="@null"
+            android:gravity="center"
             android:onClick="onRadioButtonClicked"
-            android:text="E" />
+            android:text="@string/E"
+            android:textColor="@color/white"
+            android:textSize="36sp" />
 
         <!--        RadioButton oculto-->
         <RadioButton
@@ -138,25 +150,35 @@
             android:visibility="gone"
             android:onClick="onRadioButtonClicked"
             android:checked="true"
-            android:text="-" />
+            android:text="@string/ND" />
     </RadioGroup>
 
-    <Button
-        android:id="@+id/siguiente"
+    <TextView
+        android:id="@+id/nextPregunta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
-        android:text="Suguiente"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.879"
+        android:text="@string/cero"
+        android:textColor="@color/white"
+
+        android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/start" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
+        app:tabTextColor="@color/white"
+        app:tabIndicatorColor="@null"
+        app:tabIndicator="@drawable/bottom_tab_indicator"
+        android:background="@color/primario"
+
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/siguiente" />
 
@@ -164,11 +186,39 @@
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/start"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="4dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chronometer2"
+        app:srcCompat="@drawable/boton_de_play" />
+
+
+    <Button
+        android:id="@+id/siguiente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_gradient"
+        android:text="@string/suguiente"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.879"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
