@@ -26,43 +26,8 @@
     <!-- contenido de la derecha -->
     <div>
 
-      <!-- Temporizador principal -->
-      <div class="row mb-3">
-        <div class="col-12">
-
-          <div class="glass p-4 ">
-
-            <div class="d-flex d-flex justify-content-between">
-              <div class="">
-                <span class="timer-name">Semama 2 - Tema 3 </span>
-              </div>
-              <div class="timer-main mb-1 fw-bold">01:06:29.3</div>
-            </div>
-
-            <div class="timer-secondary">Tiempo pregunta: <span class="fw-semibold">04:42.8</span></div>
-
-
-          </div>
-        </div>
-      </div>
-
-      <!-- Alternativas que el usuario puede seleccionar -->
-      <div class="d-flex justify-content-between ps-3 pe-3">
-        <!-- Opciones de respuesta -->
-        <div class="d-flex align-items-center gap-2">
-          <span class="fs-4 fw-bold me-2">6.</span>
-          <span class="circle d-flex align-items-center justify-content-center fs-5 fw-bold selected">A</span>
-          <span class="circle d-flex align-items-center justify-content-center fs-5 fw-bold">B</span>
-          <span class="circle d-flex align-items-center justify-content-center fs-5 fw-bold">C</span>
-          <span class="circle d-flex align-items-center justify-content-center fs-5 fw-bold">D</span>
-          <span class="circle d-flex align-items-center justify-content-center fs-5 fw-bold">E</span>
-        </div>
-        <!-- Opcion de pausador  -->
-        <div>
-
-          <div class="option-pause"> ||</div>
-        </div>
-      </div>
+      <TemporizadorPrincipal :temporizador="temporizador" @opcionSeleccionada="seleccionarOpcion"
+      @togglePause = "togglePause"/>
       <div class="option-line"></div>
 
 
@@ -131,7 +96,7 @@
 
 
       <!-- Hora Actual-->
-      <div class="footer-hora mt-4"><i class="fas fa-clock me-2"></i>3:34 p.m</div>
+      <HoraActual />
     </div>
 
 
@@ -139,8 +104,53 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import NavBarDesktop from '../components/NavBarDesktop.vue';
 import NavBarMovil from '../components/NavBarMovil.vue';
+import HoraActual from '../components/HoraActual.vue';
+import TemporizadorPrincipal from '../components/TemporizadorPrincipal.vue';
+
+const temporizador = ref({
+  paused: true,
+  id_temporizador: 1,
+  nombre: 'Semama 2 - Tema 3',
+  tiempo_total: '01:05:30.0',
+  tiempo_pregunta: '02:10.0',
+  pregunta_actual: '6.',
+  opciones: [{
+    alternativa: 'A',
+    seleccionada: false,
+
+  },
+  {
+    alternativa: 'B',
+    seleccionada: true,
+  },
+  {
+    alternativa: 'C',
+    seleccionada: false,
+  },
+  {
+    alternativa: 'D',
+    seleccionada: false,
+  },
+  {
+    alternativa: 'E',
+    seleccionada: false,
+  }
+  ],
+});
+
+const seleccionarOpcion = (u) => {
+ console.log(temporizador.value.opciones)
+ console.log(u)
+}
+
+const togglePause = () => {
+  //Cambiar el estado del temporizador
+  console.log(temporizador.value.tiempo_total)
+ 
+}
 </script>
 
 <style scoped></style>

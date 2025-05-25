@@ -77,6 +77,8 @@ body {
     background: var(--color-border);
     color: var(--color-text);
     border-radius: 50%;
+    cursor: pointer;
+    transition: all 2s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
