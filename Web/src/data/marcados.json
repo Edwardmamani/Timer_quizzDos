@@ -1,0 +1,33 @@
+[
+    {
+        "id_temporizador" : 1,
+        "id_pregunta" : 1,
+        "id_alternativa" : 1,
+        "fecha_hora" : "2021-01-01 00:00:00"
+    },
+    {
+        "id_temporizador" : 1,
+        "id_pregunta" : 2,
+        "id_alternativa" : 4,
+        "fecha_hora" : "2021-01-01 00:00:00"
+    },
+    {
+        "id_temporizador" : 1,
+        "id_pregunta" : 3,
+        "id_alternativa" : 4,
+        "fecha_hora" : "2021-01-01 00:00:00"
+    },
+    {
+        "id_temporizador" : 1,
+        "id_pregunta" : 4,
+        "id_alternativa" : 5,
+        "fecha_hora" : "2021-01-01 00:00:00"
+    },
+    {
+        "id_temporizador" : 1,
+        "id_pregunta" : 5,
+        "id_alternativa" : 2,
+        "fecha_hora" : "2021-01-01 00:00:00"
+    }
+
+]
