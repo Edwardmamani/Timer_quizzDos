@@ -27,7 +27,7 @@
     <div>
 
       <TemporizadorPrincipal :temporizador="temporizador" @opcionSeleccionada="seleccionarOpcion"
-      @togglePause = "togglePause"/>
+        @togglePause="togglePause" />
       <div class="option-line"></div>
 
 
@@ -142,14 +142,14 @@ const temporizador = ref({
 });
 
 const seleccionarOpcion = (u) => {
- console.log(temporizador.value.opciones)
- console.log(u)
+  console.log(temporizador.value.opciones)
+  console.log(u)
 }
 
 const togglePause = () => {
   //Cambiar el estado del temporizador
   console.log(temporizador.value.tiempo_total)
- 
+
 }
 </script>
 

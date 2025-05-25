@@ -16,7 +16,7 @@ const routes = [
     name: 'Registro',
     component: () => import('../pages/Registro.vue')
   },
-  
+
 ]
 
 const router = createRouter({

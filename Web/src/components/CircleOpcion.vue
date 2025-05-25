@@ -1,9 +1,6 @@
 <template>
-  <span 
-    class="circle d-flex align-items-center justify-content-center fs-5 fw-bold"
-    :class="{ 'selected': opcion.seleccionada }"
-    @click="seleccionar"
-  >
+  <span class="circle d-flex align-items-center justify-content-center fs-5 fw-bold"
+    :class="{ 'selected': opcion.seleccionada }" @click="seleccionar">
     {{ opcion.alternativa }}
   </span>
 </template>
@@ -15,12 +12,9 @@ const props = defineProps({
     required: true
   }
 });
-const emit =defineEmits(['seleccionar']);
+const emit = defineEmits(['seleccionar']);
 
 const seleccionar = () => {
   emit('seleccionar', props.opcion.alternativa);
 }
 </script>
-
-
-

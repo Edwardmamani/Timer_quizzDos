@@ -22,19 +22,12 @@
         <!-- Opciones de respuesta -->
         <div class="d-flex align-items-center gap-2">
             <span class="fs-4 fw-bold me-2">{{ temporizador.pregunta_actual }}</span>
-            <CircleOpcion 
-                v-for="opcion in temporizador.opciones" 
-                :key="opcion.alternativa" 
-                :opcion="opcion" 
-                @seleccionar="seleccionarOpcion" 
-            />
+            <CircleOpcion v-for="opcion in temporizador.opciones" :key="opcion.alternativa" :opcion="opcion"
+                @seleccionar="seleccionarOpcion" />
         </div>
         <!-- Opcion de pausador  -->
         <div>
-            <div class="option-pause" 
-                :class="{ 'paused': temporizador.paused }"
-                @click="togglePause"
-            >
+            <div class="option-pause" :class="{ 'paused': temporizador.paused }" @click="togglePause">
                 {{ temporizador.paused ? '⏸️' : '▶️' }}
             </div>
         </div>
@@ -61,7 +54,7 @@ const emit = defineEmits(['opcionSeleccionada', 'togglePause']);
 // Métodos
 const seleccionarOpcion = (alternativa) => {
     props.temporizador.opciones.forEach(opcion => {
-        if(opcion.alternativa === alternativa) {
+        if (opcion.alternativa === alternativa) {
             opcion.seleccionada = true;
         } else {
             opcion.seleccionada = false;
@@ -78,7 +71,7 @@ let intervalo = null;
 
 const togglePause = () => {
     console.log('togglePause');
-    if(props.temporizador.paused) {
+    if (props.temporizador.paused) {
         props.temporizador.paused = false;
         correrTiempo();
     } else {
@@ -88,7 +81,7 @@ const togglePause = () => {
     emit('togglePause');
 };
 const correrTiempo = () => {
-   
+
     let inicio_tiempo_total = performance.now() - parseTiempo(props.temporizador.tiempo_total)
     let inicio_tiempo_pregunta = performance.now() - parseTiempo(props.temporizador.tiempo_pregunta)
     intervalo = setInterval(() => {
@@ -97,17 +90,17 @@ const correrTiempo = () => {
         const transcurrido_pregunta = ahora - inicio_tiempo_pregunta
         props.temporizador.tiempo_total = formatearTiempo(transcurrido_total)
         props.temporizador.tiempo_pregunta = formatearTiempo(transcurrido_pregunta)
-        }, 100)
+    }, 100)
 }
 const pausarTiempo = () => {
     clearInterval(intervalo);
 }
 
 onMounted(() => {
-    if(props.temporizador.paused) {
+    if (props.temporizador.paused) {
         console.log('El tiempo esta pausado');
-        
-    }else {
+
+    } else {
         console.log('El tiempo esta corriendo');
         correrTiempo();
     }

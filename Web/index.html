@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TimerQuiz</title>
- <!-- Bootstrap CDN -->
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
- <link rel="stylesheet" href="src/assets/css/style.css">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="src/assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
+
 <body>
-    <div class="container py-4">
-        <div id="app"></div>
+  <div class="container py-4">
+    <div id="app"></div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="module" src="/src/main.js"></script>  
+  <script type="module" src="/src/main.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const btnMenu = document.getElementById('btn-menu-hamburguesa');
       const menuLateral = document.getElementById('menu-lateral');
-      btnMenu.addEventListener('click', function() {
+      btnMenu.addEventListener('click', function () {
         if (window.innerWidth < 992) {
           menuLateral.classList.toggle('d-none'); //ocultar el menu lateral
           menuLateral.classList.toggle('menu-lateral-movil'); //mostrar el menu lateral
         }
       });
       //cuando se hace click en el menu lateral se oculta
-      menuLateral.addEventListener('click', function() {
-          if (window.innerWidth < 992) {
+      menuLateral.addEventListener('click', function () {
+        if (window.innerWidth < 992) {
           menuLateral.classList.toggle('d-none');
           menuLateral.classList.toggle('menu-lateral-movil');
         }
-        });
-     
+      });
+
     });
   </script>
 </body>
+
 </html>
