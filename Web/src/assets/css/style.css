@@ -18,7 +18,7 @@ body {
   .logo {
     width: 82px;
     height: 62px;
-    background: url('../assets/logo.png') no-repeat center/contain, var(--color-white);
+    background: url('../logo.png') no-repeat center/contain, var(--color-white);
     border-radius: 8px;
     display: inline-block;
     box-shadow: 0 1px 4px 0 var(--color-shadow);
@@ -51,6 +51,21 @@ body {
     }
     .timer-secondary {
       font-size: 1.1rem;
+    }
+
+  }
+  @media (max-width: 991.98px) {
+    #menu-lateral.menu-lateral-movil {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 80vw;
+      height: 100vh;
+      background: rgba(255,255,255,0.97);
+      z-index: 1050;
+      display: block !important;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+      transition: left 0.3s;
     }
 
   }
