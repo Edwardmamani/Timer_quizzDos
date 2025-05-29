@@ -21,7 +21,7 @@
     <div class="d-flex justify-content-between ps-3 pe-3">
         <!-- Opciones de respuesta -->
         <div class="d-flex align-items-center gap-2">
-            <span class="fs-4 fw-bold me-2">{{ temporizador.pregunta_actual }}</span>
+            <span class="fs-4 fw-bold me-2">{{ temporizador.pregunta_actual }}.</span>
             <CircleOpcion v-for="opcion in temporizador.opciones" :key="opcion.alternativa" :opcion="opcion"
                 @seleccionar="seleccionarOpcion" />
         </div>
@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
 import CircleOpcion from './CircleOpcion.vue';
 import { parseTiempo, formatearTiempo, nowTime } from '../js/Time';
 
@@ -45,7 +45,7 @@ const props = defineProps({
     temporizador: {
         type: Object,
         required: true
-    }
+    },
 });
 
 // Emits
@@ -108,6 +108,15 @@ onMounted(() => {
 
 onUnmounted(() => {
     clearInterval(intervalo);
+});
+
+function saludar() {
+  console.log('Hola desde el hijo 👶');
+}
+defineExpose({
+    saludar,
+    pausarTiempo,
+    correrTiempo
 });
 </script>
 

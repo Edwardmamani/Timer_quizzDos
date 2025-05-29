@@ -27,7 +27,7 @@
     <div>
 
       <TemporizadorPrincipal :temporizador="temporizador" @opcionSeleccionada="seleccionarOpcion"
-        @togglePause="togglePause" />
+        @togglePause="togglePause" ref="refTemporizador" />
       <div class="option-line"></div>
 
 
@@ -41,56 +41,9 @@
       <!-- Evitamos el desorden de las preguntas en móvil, pero en mobile todas las preguntas se muestran en una sola columna -->
       <div class="d-md-block ">
         <div class="row g-3 ">
-          <div class="col-12 col-md-6">
-            <div class="pregunta-box glass d-flex align-items-center justify-content-between">
-              <div>
-                <span class="pregunta-num">1.</span>
-                <span class="pregunta-letra">A</span>
-                <span class="pregunta-tiempo"><i class="fas fa-clock me-1"></i>3:45.7</span>
-              </div>
-              <button class="btn btn-gradient">continuar</button>
-            </div>
-          </div>
-          <div class="col-12 col-md-6">
-            <div class="pregunta-box glass d-flex align-items-center justify-content-between">
-              <div>
-                <span class="pregunta-num">2.</span>
-                <span class="pregunta-letra">E</span>
-                <span class="pregunta-tiempo"><i class="fas fa-clock me-1"></i>3:45.7</span>
-              </div>
-              <button class="btn btn-gradient">continuar</button>
-            </div>
-          </div>
-          <div class="col-12 col-md-6">
-            <div class="pregunta-box glass d-flex align-items-center justify-content-between">
-              <div>
-                <span class="pregunta-num">3.</span>
-                <span class="pregunta-letra">C</span>
-                <span class="pregunta-tiempo"><i class="fas fa-clock me-1"></i>3:45.7</span>
-              </div>
-              <button class="btn btn-gradient">continuar</button>
-            </div>
-          </div>
-          <div class="col-12 col-md-6">
-            <div class="pregunta-box glass d-flex align-items-center justify-content-between">
-              <div>
-                <span class="pregunta-num">4.</span>
-                <span class="pregunta-letra">D</span>
-                <span class="pregunta-tiempo"><i class="fas fa-clock me-1"></i>3:45.7</span>
-              </div>
-              <button class="btn btn-gradient">continuar</button>
-            </div>
-          </div>
-          <div class="col-12 col-md-6">
-            <div class="pregunta-box glass d-flex align-items-center justify-content-between">
-              <div>
-                <span class="pregunta-num">5.</span>
-                <span class="pregunta-letra">A</span>
-                <span class="pregunta-tiempo"><i class="fas fa-clock me-1"></i>3:45.7</span>
-              </div>
-              <button class="btn btn-gradient">continuar</button>
-            </div>
-          </div>
+          <PreguntaMarcada v-for="pregunta in preguntas" :key="pregunta.numero" :pregunta="pregunta"
+            @preguntaSeleccionada="seleccionarPregunta" />
+
         </div>
       </div>
 
@@ -104,19 +57,22 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import NavBarDesktop from '../components/NavBarDesktop.vue';
 import NavBarMovil from '../components/NavBarMovil.vue';
 import HoraActual from '../components/HoraActual.vue';
+import PreguntaMarcada from '../components/PreguntaMarcada.vue';
 import TemporizadorPrincipal from '../components/TemporizadorPrincipal.vue';
+
+const refTemporizador = ref(null);
 
 const temporizador = ref({
   paused: true,
   id_temporizador: 1,
   nombre: 'Semama 2 - Tema 3',
   tiempo_total: '01:05:30.0',
-  tiempo_pregunta: '02:10.0',
-  pregunta_actual: '6.',
+  tiempo_pregunta: '00:00.0',
+  pregunta_actual: 6,
   opciones: [{
     alternativa: 'A',
     seleccionada: false,
@@ -124,7 +80,7 @@ const temporizador = ref({
   },
   {
     alternativa: 'B',
-    seleccionada: true,
+    seleccionada: false,
   },
   {
     alternativa: 'C',
@@ -141,16 +97,133 @@ const temporizador = ref({
   ],
 });
 
+const preguntas = ref([
+  {
+    numero: 1,
+    letra: 'A',
+    tiempo: '02:12.0',
+  },
+  {
+    numero: 2,
+    letra: 'E',
+    tiempo: '03:15.0'
+  },
+  {
+    numero: 3,
+    letra: 'C',
+    tiempo: '01:50.0'
+  },
+  {
+    numero: 4,
+    letra: 'D',
+    tiempo: '03:01.0'
+  },
+  {
+    numero: 5,
+    letra: 'A',
+    tiempo: '01:58.0'
+  }
+])
+
+const inicio_timepo_total = ref(0);
+const inicio_timepo_pregunta = ref(0);
+
+
 const seleccionarOpcion = (u) => {
   console.log(temporizador.value.opciones)
   console.log(u)
+  let pregunta = preguntas.value.find(pregunta => {
+    if (pregunta.numero === u.preguntaActual) {
+      pregunta.letra = u.alternativa;
+      pregunta.tiempo = u.tiempoPregunta;
+      return pregunta;
+    }
+  });
+
+  if (!pregunta) {
+    preguntas.value.push({
+      numero: u.preguntaActual,
+      letra: u.alternativa,
+      tiempo: u.tiempoPregunta
+    })
+  }
+
+  let preguntaSinOpcion = preguntas.value.find(pregunta => {
+    if (!pregunta.letra) {
+      return pregunta;
+    }
+  });
+  if (preguntaSinOpcion) {
+    modificarTemporizador(preguntaSinOpcion);
+  } else {
+    let ultimoNumero = preguntas.value[preguntas.value.length - 1].numero;
+    let newPregunta = {
+      numero: parseInt(ultimoNumero) + 1,
+      letra: '',
+      tiempo: '00:00.0'
+    }
+    modificarTemporizador(newPregunta);
+  }
 }
 
 const togglePause = () => {
   //Cambiar el estado del temporizador
   console.log(temporizador.value.tiempo_total)
+  refTemporizador.value.saludar();
 
 }
+
+const seleccionarPregunta = (pregunta) => {
+  console.log("Seleccionamos la pregunta:", pregunta);
+  const flag = parseInt(temporizador.value.pregunta_actual) == pregunta.numero;
+  if(!flag){
+    console.log('No es la pregunta actual')
+     let p = preguntas.value.find(pregunta => {
+      if(temporizador.value.pregunta_actual == pregunta.numero){
+        pregunta.tiempo = temporizador.value.tiempo_pregunta;
+        return pregunta;
+      }
+    })
+    if(!p){
+      preguntas.value.push({
+        numero: parseInt(temporizador.value.pregunta_actual),
+        letra: '',
+        tiempo: temporizador.value.tiempo_pregunta
+      })
+    }
+
+    modificarTemporizador(pregunta);
+    
+  }
+
+}
+
+const modificarTemporizador = (pregunta) => {
+
+  console.log(refTemporizador.value && !temporizador.value.paused)
+  if (refTemporizador.value && !temporizador.value.paused) {
+    refTemporizador.value.pausarTiempo();
+  }
+
+  console.log("Modificamos los datos de temporizador:", pregunta);
+  temporizador.value.pregunta_actual = pregunta.numero;
+  temporizador.value.tiempo_pregunta = pregunta.tiempo;
+  temporizador.value.opciones.forEach(opcion => {
+    opcion.seleccionada = false;
+    if (opcion.alternativa === pregunta.letra) {
+      opcion.seleccionada = true;
+    }
+  });
+
+  if (refTemporizador.value && !temporizador.value.paused) {
+    refTemporizador.value.correrTiempo();
+  }
+
+
+}
+onMounted(() => {
+  console.log('refTemporizador montado:', refTemporizador.value)
+});
 </script>
 
 <style scoped></style>
