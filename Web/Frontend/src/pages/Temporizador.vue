@@ -4,7 +4,7 @@
   <NavBarMovil />
 
 
-  <div class="d-flex justify-content-between gap-3">
+  <div class="d-flex flex-grow-1 overflow-hidden gap-3">
 
     <!-- Menú lateral-->
     <div id="menu-lateral" class="d-none d-lg-block">
@@ -24,22 +24,22 @@
     </div>
 
     <!-- contenido de la derecha -->
-    <div>
+    <div class="d-flex flex-column  overflow-hidden flex-grow-1">
 
       <TemporizadorPrincipal :temporizador="temporizador" @opcionSeleccionada="seleccionarOpcion"
         @togglePause="togglePause" ref="refTemporizador" />
-      <div class="option-line"></div>
+      <div class="option-line mt-3 mb-3"></div>
 
 
       <!-- Menú inferior -->
-      <div class="d-flex justify-content-between align-items-center mt-4 mb-2">
+      <div class="d-flex justify-content-between align-items-center mt-2 mb-2">
         <span class="fw-semibold"><i class="fas fa-list-ul me-2"></i>Preguntas</span>
         <span class="fw-semibold"><i class="fas fa-chart-bar me-2"></i>Estadísticas</span>
       </div>
 
       <!-- Preguntas -->
       <!-- Evitamos el desorden de las preguntas en móvil, pero en mobile todas las preguntas se muestran en una sola columna -->
-      <div class="d-md-block ">
+      <div class="d-flex flex-column justify-content-between flex-grow-1  overflow-y-scroll p-2">
         <div class="row g-3 ">
           <PreguntaMarcada v-for="pregunta in preguntas" :key="pregunta.numero" :pregunta="pregunta"
             @preguntaSeleccionada="seleccionarPregunta" />
@@ -178,7 +178,7 @@ const seleccionarPregunta = (pregunta) => {
   const flag = parseInt(temporizador.value.pregunta_actual) == pregunta.numero;
   if(!flag){
     console.log('No es la pregunta actual')
-     let p = preguntas.value.find(pregunta => {
+    let p = preguntas.value.find(pregunta => {
       if(temporizador.value.pregunta_actual == pregunta.numero){
         pregunta.tiempo = temporizador.value.tiempo_pregunta;
         return pregunta;
@@ -193,7 +193,7 @@ const seleccionarPregunta = (pregunta) => {
     }
 
     modificarTemporizador(pregunta);
-    
+
   }
 
 }

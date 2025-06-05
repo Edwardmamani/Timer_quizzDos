@@ -32,7 +32,6 @@
             </div>
         </div>
     </div>
-    <div class="option-line"></div>
 </template>
 
 <script setup>
