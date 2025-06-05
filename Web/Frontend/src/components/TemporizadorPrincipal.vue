@@ -5,7 +5,7 @@
             <div class="glass p-4">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <span class="timer-name">{{ temporizador.nombre }}</span>
+                        <input type="text" class="timer-name" @blur="handleBlur" v-model="temporizador.nombre">
                     </div>
                     <div class="timer-main mb-1 fw-bold">{{ temporizador.tiempo_total }}</div>
                 </div>
@@ -48,8 +48,11 @@ const props = defineProps({
 });
 
 // Emits
-const emit = defineEmits(['opcionSeleccionada', 'togglePause']);
+const emit = defineEmits(['opcionSeleccionada', 'togglePause', 'editNombreTemprizador']);
 
+const handleBlur = ()=>{
+    emit('editNombreTemprizador')
+}
 // Métodos
 const seleccionarOpcion = (alternativa) => {
     props.temporizador.opciones.forEach(opcion => {

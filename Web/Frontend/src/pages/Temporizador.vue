@@ -27,7 +27,7 @@
     <div class="d-flex flex-column  overflow-hidden flex-grow-1">
 
       <TemporizadorPrincipal :temporizador="temporizador" @opcionSeleccionada="seleccionarOpcion"
-        @togglePause="togglePause" ref="refTemporizador" />
+        @togglePause="togglePause" @editNombreTemprizador="editarTemporizador" ref="refTemporizador" />
       <div class="option-line mt-3 mb-3"></div>
 
 
@@ -212,6 +212,10 @@ const modificarTemporizador = (pregunta) => {
 
 }
 
+const editarTemporizador = ()=>{
+  console.log("Puedes guardar el nuevo valor de Nombre temporizador");
+  console.log(temporizador.value.nombre)
+}
 onMounted(() => {
   console.log('refTemporizador montado:', refTemporizador.value)
 });
