@@ -5,18 +5,7 @@ const routes = [
     path: '/',
     name: 'Temporizador',
     component: () => import('../pages/Temporizador.vue')
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('../pages/Login.vue')
-  },
-  {
-    path: '/registro',
-    name: 'Registro',
-    component: () => import('../pages/Registro.vue')
-  },
-
+  }
 ]
 
 const router = createRouter({
