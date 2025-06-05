@@ -1,7 +1,7 @@
 <template>
 
-  <NavBarDesktop />
-  <NavBarMovil />
+  <NavBarDesktop :user="user"/>
+  <NavBarMovil :user="user"/>
 
 
   <div class="d-flex flex-grow-1 overflow-hidden gap-3">
@@ -115,6 +115,13 @@ const preguntas = ref([
   }
 ])
 
+const user = ref({
+  token: "tk-valido",
+  autentificado: false,
+  configuracion: {
+
+  }
+})
 const inicio_timepo_total = ref(0);
 const inicio_timepo_pregunta = ref(0);
 
