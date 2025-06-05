@@ -18,10 +18,10 @@
     </div>
 
     <!-- Alternativas que el usuario puede seleccionar -->
-    <div class="d-flex justify-content-between ps-3 pe-3">
+    <div class="d-flex flex-wrap justify-content-between ps-lg-3 pe-lg-3">
         <!-- Opciones de respuesta -->
         <div class="d-flex align-items-center gap-2">
-            <span class="fs-4 fw-bold me-2">{{ temporizador.pregunta_actual }}.</span>
+            <span class="fs-4 fw-bold me-md-2">{{ temporizador.pregunta_actual }}.</span>
             <CircleOpcion v-for="opcion in temporizador.opciones" :key="opcion.alternativa" :opcion="opcion"
                 @seleccionar="seleccionarOpcion" />
         </div>

@@ -11,6 +11,9 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    host: true
+    host: true,
+    allowedHosts: [
+      'pattern-bits-wheels-substance.trycloudflare.com'
+    ]
   }
 }) 

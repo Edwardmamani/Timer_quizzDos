@@ -40,7 +40,7 @@
       <!-- Preguntas -->
       <!-- Evitamos el desorden de las preguntas en móvil, pero en mobile todas las preguntas se muestran en una sola columna -->
       <div class="d-flex flex-column justify-content-between flex-grow-1  overflow-y-scroll p-2">
-        <div class="row g-3 ">
+        <div class="row g-1 g-md-2 ">
           <PreguntaMarcada v-for="pregunta in preguntas" :key="pregunta.numero" :pregunta="pregunta"
             @preguntaSeleccionada="seleccionarPregunta" />
 
@@ -69,7 +69,7 @@ const refTemporizador = ref(null);
 const temporizador = ref({
   paused: true,
   id_temporizador: 1,
-  nombre: 'Semama 2 - Tema 3',
+  nombre: 'Primer temporizador',
   tiempo_total: '01:05:30.0',
   tiempo_pregunta: '00:00.0',
   pregunta_actual: 6,
@@ -112,16 +112,6 @@ const preguntas = ref([
     numero: 3,
     letra: 'C',
     tiempo: '01:50.0'
-  },
-  {
-    numero: 4,
-    letra: 'D',
-    tiempo: '03:01.0'
-  },
-  {
-    numero: 5,
-    letra: 'A',
-    tiempo: '01:58.0'
   }
 ])
 
@@ -221,6 +211,7 @@ const modificarTemporizador = (pregunta) => {
 
 
 }
+
 onMounted(() => {
   console.log('refTemporizador montado:', refTemporizador.value)
 });
