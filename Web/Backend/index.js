@@ -1,9 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import db from "./src/model/connection.js"; // <--- Aquí se inicia la conexión
 
 import Test from './src/router/Test.js';
-import router from './src/router/userRoutes.js';
+import userRouter from './src/router/userRoutes.js';
+import router from './src/router/timerRouter.js';
 
 
 // dot env config
@@ -17,8 +19,14 @@ app.use(cors());
 app.use(express.json());
 
 // Rutas
+app.get('/', (req,res)=>{
+  return res.json({
+    saludo: "Hola mundo"
+  })
+})
 app.use('/api/test', Test);
-app.use('/api/user', router);
+app.use('/api/user', userRouter);
+app.use('/api/timer', router);
 
 
 
@@ -33,5 +41,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
+  console.log(`Servidor corriendo en el puerto http://localhost:${PORT}`);
 }); 

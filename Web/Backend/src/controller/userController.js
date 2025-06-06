@@ -27,7 +27,14 @@ var userController = {
     createUser: async (req, res) => {
         const user = new User({
             nombre: req.body.nombre,
-            email: req.body.email
+            email: req.body.email,
+            password_hash: req.body.password_hash,
+            preferencias: {
+                tema_visual: req.body.preferencias?.tema_visual,
+                idioma: req.body.preferencias?.idioma || 'es',
+                notificaciones: req.body.preferencias?.notificaciones ?? true
+            },
+            rol: req.body.rol || 'usuario',
         });
 
         try {
