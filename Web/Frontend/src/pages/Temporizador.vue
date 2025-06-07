@@ -1,9 +1,5 @@
 <template>
 
-  <NavBarDesktop :user="user"/>
-  <NavBarMovil :user="user"/>
-
-
   <div class="d-flex flex-grow-1 overflow-hidden gap-3">
 
     <!-- Menú lateral-->
@@ -58,8 +54,6 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import NavBarDesktop from '../components/NavBarDesktop.vue';
-import NavBarMovil from '../components/NavBarMovil.vue';
 import HoraActual from '../components/HoraActual.vue';
 import PreguntaMarcada from '../components/PreguntaMarcada.vue';
 import TemporizadorPrincipal from '../components/TemporizadorPrincipal.vue';
@@ -115,15 +109,6 @@ const preguntas = ref([
   }
 ])
 
-const user = ref({
-  token: "tk-valido",
-  autentificado: false,
-  configuracion: {
-
-  }
-})
-const inicio_timepo_total = ref(0);
-const inicio_timepo_pregunta = ref(0);
 
 
 const seleccionarOpcion = (u) => {
