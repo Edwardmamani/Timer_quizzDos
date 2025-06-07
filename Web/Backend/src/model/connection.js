@@ -2,10 +2,7 @@ import mongoose from "mongoose";
 
 const uri = "mongodb://localhost:27017/timer_quiz";
 
-mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect(uri);
 
 const db = mongoose.connection;
 

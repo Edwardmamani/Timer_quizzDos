@@ -1,4 +1,37 @@
+import { ArchivoRaiz } from '../model/Archivo.js';
 import User from '../model/User.js'
+import archivoController from './achivoController.js';
+import jwt from 'jsonwebtoken';
+
+const _crearUsuario = async (req) => {
+    const user = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        preferencias: {
+            tema_visual: req.body.preferencias?.tema_visual,
+            idioma: req.body.preferencias?.idioma || 'es',
+            notificaciones: req.body.preferencias?.notificaciones ?? true
+        },
+        rol: req.body.rol || 'usuario',
+    });
+
+    try {
+        const newUser = await user.save();
+        // Crear un archivo raíz para el usuario
+        const respuest = await archivoController.__createArchivoRaiz({ params: { id_user: newUser._id } });
+        const token = jwt.sign(
+            { id: newUser._id, id_archivo_raiz: respuest.data._id, },
+            process.env.JWT_SECRET,  // Cadena fija temporal
+            { expiresIn: '48h' }
+        );
+        // Responder con el usuario creado
+        return { status: 201, newUser, archivoRaiz: respuest, token };
+    } catch (error) {
+        return { status: 400, message: error.message };
+    }
+}
+
 var userController = {
     // Obtener todos los usuarios
     getAllUsers: async (req, res) => {
@@ -25,24 +58,22 @@ var userController = {
 
     // Crear un nuevo usuario
     createUser: async (req, res) => {
-        const user = new User({
-            nombre: req.body.nombre,
-            email: req.body.email,
-            password_hash: req.body.password_hash,
-            preferencias: {
-                tema_visual: req.body.preferencias?.tema_visual,
-                idioma: req.body.preferencias?.idioma || 'es',
-                notificaciones: req.body.preferencias?.notificaciones ?? true
-            },
-            rol: req.body.rol || 'usuario',
-        });
-
-        try {
-            const newUser = await user.save();
-            res.status(201).json(newUser);
-        } catch (error) {
-            res.status(400).json({ message: error.message });
-        }
+       _crearUsuario(req)
+            .then(response => {
+                if (response.status === 201) {
+                    res.status(201).json({
+                        message: 'Usuario creado exitosamente',
+                        user: response.newUser,
+                        archivoRaiz: response.archivoRaiz,
+                        token: response.token
+                    });
+                } else {
+                    res.status(response.status).json({ message: response.message });
+                }
+            })
+            .catch(error => {
+                res.status(500).json({ message: error.message });
+            });
     },
 
     // Actualizar un usuario
@@ -76,6 +107,46 @@ var userController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
+    },
+
+    login: async (req, res) => {
+        const { email, password } = req.body;
+        try {
+            const user = await User.find({ email: email });
+            if (user.length === 0) return res.status(404).json({ message: 'Usuario no encontrado' });
+
+            if (user[0].password !== password) return res.status(401).json({ message: 'Contraseña incorrecta' });
+
+            const token = jwt.sign(
+                { id: user[0]._id, id_archivo_raiz: user[0].archivo_raiz },
+                process.env.JWT_SECRET,
+                { expiresIn: '48h' }
+            );
+            const archivoRaiz = await ArchivoRaiz.find({ owner: user[0]._id });
+
+            res.json({ user: user[0], archivoRaiz, token });
+        } catch (error) {
+            return res.status(500).json({ message: error.message });
+        }
+    },
+    // Registrar un nuevo usuario
+    register: async (req, res) => {
+        _crearUsuario(req)
+            .then(response => {
+                if (response.status === 201) {
+                    res.status(201).json({
+                        message: 'Usuario registrado exitosamente',
+                        user: response.newUser,
+                        archivoRaiz: response.archivoRaiz,
+                        token: response.token
+                    });
+                } else {
+                    res.status(response.status).json({ message: response.message });
+                }
+            })
+            .catch(error => {
+                res.status(500).json({ message: error.message });
+            });
     }
 };
 
