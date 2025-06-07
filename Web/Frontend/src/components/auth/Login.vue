@@ -29,19 +29,20 @@ const handleLogin = async () => {
     console.log('Login button clicked');
     try {
         const response = await axios.post('http://localhost:3001/api/auth/login', user.value);
+        console.log('Response from login:', response);
         
         if (response.status !== 200) {
             throw new Error('Login failed');
         }
         localStorage.setItem('token', response.data.token);
-        localStorage.setItem('archivoRaiz', response.data.archivoRaiz[0]._id);
+        localStorage.setItem('archivoRaiz', response.data.archivoRaiz._id);
 
         console.log('Login successful:', response);
         emit('hideComponent', response.data.token); 
 
         router.push({ name: 'file' }); 
     } catch (error) {
-        console.error('Login failed:', error);
+        console.error('Login failed:', error.response);
         
     }
 };

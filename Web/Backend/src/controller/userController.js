@@ -26,7 +26,7 @@ const _crearUsuario = async (req) => {
             { expiresIn: '48h' }
         );
         // Responder con el usuario creado
-        return { status: 201, newUser, archivoRaiz: respuest, token };
+        return { status: 201, newUser, archivoRaiz: respuest.data, token };
     } catch (error) {
         return { status: 400, message: error.message };
     }
@@ -112,19 +112,19 @@ var userController = {
     login: async (req, res) => {
         const { email, password } = req.body;
         try {
-            const user = await User.find({ email: email });
+            const user = await User.findOne({ email: email });
             if (user.length === 0) return res.status(404).json({ message: 'Usuario no encontrado' });
 
-            if (user[0].password !== password) return res.status(401).json({ message: 'Contraseña incorrecta' });
+            if (user.password !== password) return res.status(401).json({ message: 'Contraseña incorrecta' });
 
             const token = jwt.sign(
-                { id: user[0]._id, id_archivo_raiz: user[0].archivo_raiz },
+                { id: user._id, id_archivo_raiz: user.archivo_raiz },
                 process.env.JWT_SECRET,
                 { expiresIn: '48h' }
             );
-            const archivoRaiz = await ArchivoRaiz.find({ owner: user[0]._id });
+            const archivoRaiz = await ArchivoRaiz.findOne({ owner: user._id });
 
-            res.json({ user: user[0], archivoRaiz, token });
+            res.json({ user: user, archivoRaiz, token });
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }

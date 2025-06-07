@@ -35,8 +35,9 @@ const handleRegister = async () => {
             if (response.status !== 201) {
                 throw new Error('Registration failed');
             }
+            console.log('Registration response:', response);
             localStorage.setItem('token', response.data.token);
-            localStorage.setItem('archivoRaiz', response.data.archivoRaiz[0]._id);
+            localStorage.setItem('archivoRaiz', response.data.archivoRaiz._id);
             console.log('Registration successful:', response);
             emit('hideComponent');
             router.push({ name: 'file' });

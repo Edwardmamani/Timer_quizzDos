@@ -53,7 +53,7 @@ const props = defineProps({
 })
 const hidenModal = (token) => {
     if (btnClose.value) {
-        props.user.autentificado = true;authenticated
+        props.user.autentificado = true;
         props.user.token = token;
         componenteActual.value = null;
         btnClose.value.click();
