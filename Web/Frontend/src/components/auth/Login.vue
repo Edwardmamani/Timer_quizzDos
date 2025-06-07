@@ -17,6 +17,9 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import { useAuthStore } from '../../store/auth.store.js';
+const authStore = useAuthStore();
+
 const router = useRouter();
 
 const emit = defineEmits(['hideComponent']);
@@ -34,8 +37,10 @@ const handleLogin = async () => {
         if (response.status !== 200) {
             throw new Error('Login failed');
         }
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('archivoRaiz', response.data.archivoRaiz._id);
+
+        authStore.setArchivoRaiz(response.data.archivoRaiz._id);
+        authStore.setToken(response.data.token);
+        authStore.setUser(response.data.user);
 
         console.log('Login successful:', response);
         emit('hideComponent', response.data.token); 

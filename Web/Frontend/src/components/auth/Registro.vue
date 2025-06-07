@@ -21,6 +21,9 @@
 import axios from 'axios';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '../../store/auth.store.js';
+const authStore = useAuthStore();
+
 const router = useRouter();
 const user = ref({
     name: 'edward',
@@ -35,10 +38,10 @@ const handleRegister = async () => {
             if (response.status !== 201) {
                 throw new Error('Registration failed');
             }
-            console.log('Registration response:', response);
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('archivoRaiz', response.data.archivoRaiz._id);
             console.log('Registration successful:', response);
+            authStore.setArchivoRaiz(response.data.archivoRaiz._id);
+            authStore.setToken(response.data.token);
+            authStore.setUser(response.data.user);
             emit('hideComponent');
             router.push({ name: 'file' });
 

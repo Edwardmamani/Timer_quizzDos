@@ -8,7 +8,7 @@
             <router-link :to="{ name: 'file' }">Files</router-link>
         </div>
 
-       <BtnAut :user="user" />
+        <BtnAut />
 
 
     </nav>
@@ -18,10 +18,4 @@
 import { RouterLink } from 'vue-router';
 import BtnAut from './BtnAut.vue';
 // Props
-const props = defineProps({
-    user: {
-        type: Object,
-        required: true
-    },
-});
 </script>

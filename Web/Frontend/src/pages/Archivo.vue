@@ -141,6 +141,8 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
+import { useAuthStore } from '../store/auth.store.js'
+const authStorage = useAuthStore()
 
 // Estado reactivo
 const viewMode = ref('list') // 'list' o 'grid'
@@ -181,7 +183,7 @@ const crearFolder = () => {
     axios.post('http://localhost:3001/api/archivo/', {
         name: 'Nueva Carpeta (2)',
         type: 'folder',
-        archivo: localStorage.getItem('archivoRaiz')
+        archivo: authStorage.getArchivoRaiz() 
     }).then(response => {
         console.log('Carpeta creada:', response.data)
         // Recargar los datos después de crear la carpeta
@@ -199,7 +201,7 @@ const crearDocumento = () => {
 // antes de cargar los datos, inicializamos algunos ejemplos
 const fechtData = () => {
     // http://localhost:3001/api/archivo/[archivoId]
-    const archivoId = localStorage.getItem('archivoRaiz')
+    const archivoId = authStorage.getArchivoRaiz()
     axios.get('http://localhost:3001/api/archivo/' + archivoId)
         .then(response => {
             console.log('Datos cargados:', response)

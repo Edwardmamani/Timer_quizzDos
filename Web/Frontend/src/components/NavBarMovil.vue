@@ -6,21 +6,13 @@
     ref="btnMenu"  
     style="cursor:pointer;"><i class="fas fa-bars fa-lg"></i></span>
 
-   <BtnAut :user="user"/>
+   <BtnAut />
   </nav>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted, defineProps } from 'vue';
 import BtnAut from './BtnAut.vue';
-
-// Props
-const props = defineProps({
-    user: {
-        type: Object,
-        required: true
-    },
-});
 
 
 const btnMenu = ref(null);

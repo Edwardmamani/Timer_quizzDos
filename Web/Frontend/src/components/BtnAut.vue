@@ -1,6 +1,6 @@
 <template>
     <!-- Si el usuario está autenticado -->
-    <div class="d-flex align-items-center gap-2" v-if="user.autentificado">
+    <div class="d-flex align-items-center gap-2" v-if="authStore.token">
         <button class="btn btn-outline-primary rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#btnAut"
             @click="componenteActual = Perfil"><i class="fas fa-user me-2"></i>Perfil</button>
         <button class="btn btn-gradient rounded-pill px-3" @click="logout"><i
@@ -40,21 +40,16 @@ import Login from './auth/Login.vue';
 import Registro from './auth/Registro.vue';
 import Perfil from './Perfil.vue';
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '../store/auth.store';
+const authStore = useAuthStore();
 const router = useRouter();
 
 const btnClose = ref(null);
 const componenteActual = shallowRef(null)
 
-const props = defineProps({
-    user: {
-        type: Object,
-        required: true
-    }
-})
 const hidenModal = (token) => {
     if (btnClose.value) {
-        props.user.autentificado = true;
-        props.user.token = token;
+        authStore.setToken(token);
         componenteActual.value = null;
         btnClose.value.click();
     }
@@ -62,9 +57,7 @@ const hidenModal = (token) => {
 }
 
 const logout = () => {
-    props.user.autentificado = false; 
-    props.user.token = null; 
-    localStorage.removeItem("token"); 
+    authStore.logout();
     console.log('User logged out');
     router.push({ name: 'about' }); 
 }
